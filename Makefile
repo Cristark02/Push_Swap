@@ -6,7 +6,7 @@
 #    By: mmita <mmita@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 15:19:46 by mmita             #+#    #+#              #
-#    Updated: 2023/07/07 12:59:49 by mmita            ###   ########.fr        #
+#    Updated: 2023/07/11 15:46:57 by mmita            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,6 +27,7 @@ SRC		= main.c \
 		utils_input.c \
 		utils_check.c \
 		utils_stack.c \
+		utils_ft.c \
 		\
 		push.c \
 		swap.c \

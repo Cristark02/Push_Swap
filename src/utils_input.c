@@ -6,7 +6,7 @@
 /*   By: mmita <mmita@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 20:30:05 by mmita             #+#    #+#             */
-/*   Updated: 2023/07/10 17:43:21 by mmita            ###   ########.fr       */
+/*   Updated: 2023/07/31 15:11:11 by mmita            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static int	is_number(char *argv)
 	return (1);
 }
 
-//compreuba si hau elementos duplicados
+//compreuba si hay elementos duplicados
 int	have_duplicates(char **argv)
 {
 	int	i;
@@ -62,33 +62,10 @@ int	is_zero(char *argv)
 	return (1);
 }
 
-/* i se inicializa en 1 en lugar de 0 porque argv[0]
-se refiere al nombre del programa en sí mismo*/
-int	check_args(int argc, char **argv)
+int	check_args(char **argv)
 {
 	int		i;
 	int		zero;
-	char	**newarg;
-
-	i = 0;
-	if (argc >= 2)
-	{
-		if (ft_strchr(argv[1], 32))
-		{
-			newarg = ft_split(argv[1], 32);
-			while (newarg[i] != NULL)
-				i++;
-			argc = i + 1;
-			while (i > 0)
-			{
-				newarg[i] = newarg[i - 1];
-				i--;
-			}
-			newarg[0] = argv[0];
-			else
-				newarg = argv;
-		}
-	}
 
 	i = 1;
 	zero = 0;
@@ -104,4 +81,22 @@ int	check_args(int argc, char **argv)
 	if (have_duplicates(argv))
 		return (0);
 	return (1);
+}
+
+char	*ft_strdup(const char *s1)
+{
+	char	*ptr;
+	size_t	i;
+
+	i = 0;
+	ptr = (char *)malloc(sizeof(*ptr) * (ft_strlen(s1) + 1));
+	if (ptr == NULL)
+		return (0);
+	while (s1[i] != '\0')
+	{
+		ptr[i] = s1[i];
+		i++;
+	}
+	ptr[i] = '\0';
+	return (ptr);
 }

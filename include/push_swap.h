@@ -6,7 +6,7 @@
 /*   By: mmita <mmita@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 18:55:35 by mmita             #+#    #+#             */
-/*   Updated: 2023/07/10 16:39:36 by mmita            ###   ########.fr       */
+/*   Updated: 2023/07/31 15:18:32 by mmita            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
-# include <stdio.h>
 
 typedef struct s_stack
 {
@@ -79,10 +78,14 @@ long int	ft_atoi(const char *str);
 void		ft_putstr(char *str);
 
 /*Comprobaciones de Entradas*/
-int			check_args(int argc, char **argv);
+int			check_args(char **argv);
 int			ft_strncmp(const char *s1, const char *s2);
 int			is_digit(char c);
 int			is_sign(char c);
 char		*ft_strchr(const char *s, int c);
+char		**ft_split(char const *s, char c);
+size_t		ft_count_word(const char *str, char c);
+size_t		ft_strlen(const char *str);
+char		*ft_strdup(const char *s1);
 
 #endif
