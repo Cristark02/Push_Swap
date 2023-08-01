@@ -6,7 +6,7 @@
 /*   By: mmita <mmita@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 18:54:30 by mmita             #+#    #+#             */
-/*   Updated: 2023/07/31 16:08:40 by mmita            ###   ########.fr       */
+/*   Updated: 2023/08/01 13:31:24 by mmita            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,27 @@ static void	push_swap(t_stack **a, t_stack **b, int size)
 		sort (a, b);
 }
 
-int	main(int argc, char **argv)
+static char	**parse_split(int argc, char **argv, char **newarg)
 {
-	t_stack	*a;
-	t_stack	*b;
-	char	**newarg;
-	int		stack_size;
+	int	i;
+
+	i = 0;
+	newarg = malloc(argc * sizeof(char *));
+	while (argv[i])
+	{
+		newarg[i] = ft_strdup(argv[i]);
+		i++;
+	}
+		newarg[i] = NULL;
+	return (newarg);
+}
+
+static char	**parse(int *argc, char **argv, char **newarg)
+{
 	int		i;
 	char	**argaux;
-	
+
 	i = 0;
-	newarg = NULL;
-	if (argc < 2)
-		return (0);
 	if (ft_strchr(argv[1], 32))
 	{
 		newarg = ft_split(argv[1], 32);
@@ -48,18 +56,23 @@ int	main(int argc, char **argv)
 		i = 0;
 		while (newarg[i])
 			i++;
-		argc = i;
+		*argc = i;
 	}
 	else
-	{
-		newarg = malloc(argc * sizeof(char *));
-		while (argv[i])
-		{
-			newarg[i] = ft_strdup(argv[i]);
-			i++;
-		}
-		newarg[i] = NULL;
-	}
+		newarg = parse_split(*argc, argv, NULL);
+	return (newarg);
+}
+
+int	main(int argc, char **argv)
+{
+	t_stack	*a;
+	t_stack	*b;
+	char	**newarg;
+	int		stack_size;
+
+	if (argc < 2)
+		return (0);
+	newarg = parse(&argc, argv, NULL);
 	if (!check_args(newarg))
 	{
 		write(2, "Error: Argumentos incorrectos\n", 30);
