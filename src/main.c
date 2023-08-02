@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
-#include <stdio.h>
 
 static void	push_swap(t_stack **a, t_stack **b, int size)
 {
