@@ -6,11 +6,12 @@
 /*   By: mmita <mmita@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 18:54:30 by mmita             #+#    #+#             */
-/*   Updated: 2023/08/01 13:31:24 by mmita            ###   ########.fr       */
+/*   Updated: 2023/08/02 20:06:39 by mmita            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+#include <stdio.h>
 
 static void	push_swap(t_stack **a, t_stack **b, int size)
 {
@@ -43,7 +44,7 @@ static char	**parse(int *argc, char **argv, char **newarg)
 	char	**argaux;
 
 	i = 0;
-	if (ft_strchr(argv[1], 32))
+	if (ft_strchr(argv[1], 32) && *argc == 2)
 	{
 		newarg = ft_split(argv[1], 32);
 		argaux = ft_split(argv[1], 32);
@@ -73,9 +74,9 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return (0);
 	newarg = parse(&argc, argv, NULL);
-	if (!check_args(newarg))
+	if (argc == 1 || !check_args(newarg))
 	{
-		write(2, "Error: Argumentos incorrectos\n", 30);
+		write(2, "Error\n", 6);
 		exit (1);
 	}
 	b = NULL;
