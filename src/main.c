@@ -88,6 +88,7 @@ int	main(int argc, char **argv)
 	if (argc == 1 || !check_args(newarg))
 	{
 		write(2, "Error\n", 6);
+		free_char(newarg);
 		exit (1);
 	}
 	b = NULL;
