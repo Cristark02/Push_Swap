@@ -93,7 +93,7 @@ int	main(int argc, char **argv)
 	}
 	b = NULL;
 	a = fill_stack(argc, newarg);
-	free_char(newarg);
+	//free_char(newarg);
 	stack_size = get_stack_size(a);
 	assign_index(a, stack_size + 1);
 	push_swap(&a, &b, stack_size);
