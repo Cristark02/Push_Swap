@@ -6,7 +6,7 @@
 /*   By: mmita <mmita@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 18:55:35 by mmita             #+#    #+#             */
-/*   Updated: 2023/08/01 16:12:35 by mmita            ###   ########.fr       */
+/*   Updated: 2023/08/07 14:45:13 by mmita            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <limits.h>
+# include "../memory-leaks/include/memory_leaks.h"
 
 typedef struct s_stack
 {
@@ -76,6 +77,7 @@ void		free_stack(t_stack **stack);
 int			positive(int nb);
 long int	ft_atoi(const char *str);
 void		ft_putstr(char *str);
+void		free_char(char **arg);
 
 /*Comprobaciones de Entradas*/
 int			check_args(char **argv);

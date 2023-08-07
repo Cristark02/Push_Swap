@@ -6,11 +6,12 @@
 /*   By: mmita <mmita@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 18:54:30 by mmita             #+#    #+#             */
-/*   Updated: 2023/08/02 20:06:39 by mmita            ###   ########.fr       */
+/*   Updated: 2023/08/07 16:20:58 by mmita            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+#include <stdio.h>
 
 static void	push_swap(t_stack **a, t_stack **b, int size)
 {
@@ -47,20 +48,28 @@ static char	**parse(int *argc, char **argv, char **newarg)
 	{
 		newarg = ft_split(argv[1], 32);
 		argaux = ft_split(argv[1], 32);
-		while (newarg[i])
+		while (argaux[i])
 		{
-			newarg[i + 1] = argaux[i];
+			free(newarg[i + 1]);
+			newarg[i + 1] = ft_strdup(argaux[i]);
 			i++;
 		}
-		newarg[0] = argv[0];
+		free(newarg[0]);
+		newarg[0] = ft_strdup(argv[0]);
 		i = 0;
 		while (newarg[i])
 			i++;
 		*argc = i;
+		free_char(argaux);
 	}
 	else
 		newarg = parse_split(*argc, argv, NULL);
 	return (newarg);
+}
+
+void	ft_leaks(void)
+{
+	system ("leaks -q push_swap");
 }
 
 int	main(int argc, char **argv)
@@ -69,9 +78,12 @@ int	main(int argc, char **argv)
 	t_stack	*b;
 	char	**newarg;
 	int		stack_size;
+	int		i;
 
+	i = 0;
 	if (argc < 2)
 		return (0);
+	atexit(ft_leaks);
 	newarg = parse(&argc, argv, NULL);
 	if (argc == 1 || !check_args(newarg))
 	{
@@ -80,6 +92,7 @@ int	main(int argc, char **argv)
 	}
 	b = NULL;
 	a = fill_stack(argc, newarg);
+	free_char(newarg);
 	stack_size = get_stack_size(a);
 	assign_index(a, stack_size + 1);
 	push_swap(&a, &b, stack_size);

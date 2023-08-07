@@ -6,7 +6,7 @@
 #    By: mmita <mmita@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/06 15:19:46 by mmita             #+#    #+#              #
-#    Updated: 2023/07/11 15:46:57 by mmita            ###   ########.fr        #
+#    Updated: 2023/08/07 15:04:01 by mmita            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,8 @@ NAME	= push_swap
 
 SRC_PATH = src/
 OBJ_PATH = obj/
+
+LEAKS = memory-leaks/memory_leaks.a
 
 SRC		= main.c \
 		init.c \
@@ -65,15 +67,15 @@ INCS	= -I ./include/
 all: $(OBJ_PATH) $(NAME) 
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
-	@$(CC) $(CFLAGS) -c $< -o $@ $(INCS)
+	@$(CC) $(CFLAGS)  -c $< -o $@ $(INCS)
 	@echo "${GREEN} ◎ $(YELLOW)Compilando ${RED} ▢ ▢ ▢ ▷  $(CYAN)$< $(DEF_COLOR)"
-	@${CC} ${CFLAGS} -c $< -o $@ $(INCS)
+	@${CC} ${CFLAGS}  -c $< -o $@ $(INCS)
 			
 $(OBJ_PATH):
 	@mkdir $(OBJ_PATH)
 			
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(LEAKS) $(OBJS) -o $(NAME)
 
 	@echo "$(GREEN)\n\nPush Swap compilado correctamente$(DEF_COLOR)\n"
 clean:
