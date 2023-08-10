@@ -6,11 +6,12 @@
 /*   By: mmita <mmita@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 18:54:30 by mmita             #+#    #+#             */
-/*   Updated: 2023/08/02 20:06:39 by mmita            ###   ########.fr       */
+/*   Updated: 2023/08/10 14:15:55 by mmita            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+#include <stdio.h>
 
 static void	push_swap(t_stack **a, t_stack **b, int size)
 {
@@ -22,44 +23,39 @@ static void	push_swap(t_stack **a, t_stack **b, int size)
 		sort (a, b);
 }
 
-static char	**parse_split(int argc, char **argv, char **newarg)
+static char	**parse_split(int *argc, char **argv, char **newarg)
 {
 	int	i;
 
 	i = 0;
-	newarg = malloc(argc * sizeof(char *));
+	newarg = malloc(*argc * sizeof(char *));
 	while (argv[i])
 	{
 		newarg[i] = ft_strdup(argv[i]);
 		i++;
 	}
-		newarg[i] = NULL;
+	newarg[i] = NULL;
+	*argc = *argc - 1;
 	return (newarg);
 }
 
 static char	**parse(int *argc, char **argv, char **newarg)
 {
 	int		i;
-	char	**argaux;
 
 	i = 0;
-	if (ft_strchr(argv[1], 32) && *argc == 2)
+	if (*argc == 2 && ft_strchr(argv[0], 32))
 	{
-		newarg = ft_split(argv[1], 32);
-		argaux = ft_split(argv[1], 32);
-		while (newarg[i])
-		{
-			newarg[i + 1] = argaux[i];
-			i++;
-		}
-		newarg[0] = argv[0];
+		newarg = ft_split(argv[0], 32);
+		if (!newarg)
+			return (NULL);
 		i = 0;
 		while (newarg[i])
 			i++;
 		*argc = i;
 	}
 	else
-		newarg = parse_split(*argc, argv, NULL);
+		newarg = parse_split(argc, argv, NULL);
 	return (newarg);
 }
 
@@ -72,8 +68,8 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 		return (0);
-	newarg = parse(&argc, argv, NULL);
-	if (argc == 1 || !check_args(newarg))
+	newarg = parse(&argc, &argv[1], NULL);
+	if (argc == 0 || !newarg || !check_args(newarg))
 	{
 		write(2, "Error\n", 6);
 		exit (1);

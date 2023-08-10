@@ -6,7 +6,7 @@
 /*   By: mmita <mmita@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 20:30:05 by mmita             #+#    #+#             */
-/*   Updated: 2023/08/02 20:06:55 by mmita            ###   ########.fr       */
+/*   Updated: 2023/08/10 12:46:43 by mmita            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	is_number(char *argv)
 		i++;
 	while (argv[i] && is_digit(argv[i]))
 		i++;
-	if (argv[i] != '\0')
+	if (argv[i] != '\0' || argv[i] == ' ')
 		return (0);
 	return (1);
 }
@@ -67,7 +67,7 @@ int	check_args(char **argv)
 	int		i;
 	int		zero;
 
-	i = 1;
+	i = 0;
 	zero = 0;
 	while (argv[i])
 	{

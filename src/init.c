@@ -6,13 +6,13 @@
 /*   By: mmita <mmita@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/02 21:02:59 by mmita             #+#    #+#             */
-/*   Updated: 2023/08/02 16:56:58 by mmita            ###   ########.fr       */
+/*   Updated: 2023/08/10 14:04:50 by mmita            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/push_swap.h"
+#include <stdio.h>
 
-// les pone un numero identificativo a cada elemetno del stack
 void	assign_index(t_stack *a, int stack_size)
 {
 	t_stack	*ptr;
@@ -42,7 +42,6 @@ void	assign_index(t_stack *a, int stack_size)
 	}
 }
 
-//rellena el stack a con todos los elementos
 t_stack	*fill_stack(int argc, char **argv)
 {
 	t_stack		*stack_a;
@@ -51,21 +50,27 @@ t_stack	*fill_stack(int argc, char **argv)
 
 	stack_a = NULL;
 	n = 0;
-	i = 1;
+	i = 0;
 	while (i < argc)
 	{
 		n = ft_atoi(argv[i]);
+		free(argv[i]);
 		if (n > INT_MAX || n < INT_MIN)
 		{
 			free_stack (&stack_a);
 			write(2, "Error\n", 6);
 			exit (1);
 		}
-		if (i == 1)
+		if (i == 0)
+		{
 			stack_a = new_stack((int)n);
+		}
 		else
+		{
 			stack_add_bottom(&stack_a, new_stack((int)n));
+		}
 		i++;
 	}
+	free(argv);
 	return (stack_a);
 }

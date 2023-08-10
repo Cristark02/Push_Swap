@@ -43,7 +43,7 @@ t_stack	*get_stack_bottom(t_stack *stack)
 	return (stack);
 }
 
-void	stack_add_bottom(t_stack **stack, t_stack *new)
+void	 stack_add_bottom(t_stack **stack, t_stack *new)
 {
 	t_stack	*tail;
 
